@@ -1,0 +1,1 @@
+This is a simple full-stack web application that functions as a productivity tool combining a timer, to-do task manager, and user authentication system. Built using Node.js, Express.js, MySQL, and plain HTML/CSS/JS (no frameworks on the frontend).
