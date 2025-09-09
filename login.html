@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Timer - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .wrapper {
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px 40px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-box input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+        }
+
+        .input-box i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .remember-forgot a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .remember-forgot a:hover {
+            color: #1d4ed8;
+        }
+
+        .btn {
+            width: 100%;
+            background: #3b82f6;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Login Form -->
+        <form id="login-form">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Email Id" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="link">
+                <p>Don't have an account? <a href="#" onclick="showForm('register')">Register</a></p>
+            </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="hidden">
+            <h1>Register</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Full Name" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="email" placeholder="Email Address" required>
+                <i class='bx bxs-envelope'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Create Password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <div class="link">
+                <p>Already have an account? <a href="#" onclick="showForm('login')">Login</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+  // Show form logic
+function showForm(form) {
+    document.getElementById('login-form').classList.add('hidden');
+    document.getElementById('register-form').classList.add('hidden');
+    document.getElementById(`${form}-form`).classList.remove('hidden');
+}
+
+// Registration Logic
+function registerUser(event) {
+    event.preventDefault();
+    const fullName = document.querySelector('#register-form input[placeholder="Full Name"]').value.trim();
+    const email = document.querySelector('#register-form input[placeholder="Email Address"]').value.toLowerCase().trim();
+    const password = document.querySelector('#register-form input[placeholder="Create Password"]').value;
+
+    if (localStorage.getItem(email)) {
+        alert('User already registered!');
+        return;
+    }
+
+    // Create user1 object with tasks initialized as an empty array
+    const user1 = {
+        fullName,
+        password,
+        tasks: []
+    };
+
+    // Store the user1 object in localStorage using email as the key
+    localStorage.setItem(email, JSON.stringify(user1));
+    alert('Registration successful!');
+    showForm('login');
+}
+
+// Login Logic
+function loginUser(event) {
+    event.preventDefault();
+    const email = document.querySelector('#login-form input[placeholder="Email Id"]').value.toLowerCase().trim();
+    const password = document.querySelector('#login-form input[placeholder="Password"]').value;
+
+    const userData = localStorage.getItem(email);
+    if (!userData) {
+        alert('No user found with this email!');
+        return;
+    }
+
+    const { fullName, password: storedPassword, tasks } = JSON.parse(userData);
+    if (password === storedPassword) {
+        alert(`Welcome, ${fullName}!`);
+        // Store the logged-in user's email in localStorage for future use
+        localStorage.setItem("loggedInUser", email);
+        window.location.href = 'application.html';
+    } else {
+        alert('Incorrect password!');
+    }
+}
+
+// Attach events
+document.getElementById('register-form').addEventListener('submit', registerUser);
+document.getElementById('login-form').addEventListener('submit', loginUser);
+
+    </script>
+</body>
+</html>

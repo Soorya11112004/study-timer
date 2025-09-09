@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Study Timer</h1>
+        <nav>
+            <ul>
+                <li><a href="#timer">Timer</a></li>
+                <li><a href="#motivation">Motivation</a></li>
+                <li><a href="#learning">Learning</a></li>
+                <li><a href="#tasks">Time Table</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="timer">
+            <h2>Timer</h2>
+            <div class="timer-container">
+                <input type="number" id="study-time" placeholder="Study Time (minutes)"><br>
+                <input type="number" id="break-time" placeholder="Break Time (minutes)"><br>
+                <button id="start-button">Start</button>
+                <button id="reset-button">Reset</button>
+                <p id="timer-display">00:00</p>
+            </div>
+        </section>
+        <section id="motivation">
+            <h2>Motivations For Study</h2>
+            <a href="https://www.youtube.com/results?search_query=gururaj+karajagi+speech+in+kannada" target="_blank">Click here for motivation</a><br>
+            <a href="https://www.youtube.com/@motivationfactory.888" target="_blank">Click here to get more motivation</a>
+        </section>
+        <section id="learning">
+            <h2>Develop Your Skills</h2>
+            <a href="https://www.indiabix.com/" target="_blank">Click here to learn with IndiaBix</a><br>
+            <a href="https://www.w3schools.com/" target="_blank">Click here to learn with W3Schools</a><br>
+            <a href="https://www.codewithharry.com/#google_vignette" target="_blank">Click here to learn with CodeWithHarry</a><br>
+            <a href="https://leetcode.com/" target="_blank">Do some coding practice with LeetCode</a>
+        </section>
+        <section id="tasks">
+            <h2>Your Task</h2>
+            <ul id="task-list"></ul>
+            <input type="text" id="task-input" placeholder="Enter a task">
+            <button id="add-task-btn">Add Task</button>
+        </section>
+    </main>
+    <footer>
+        <label>
+            <input type="checkbox" id="dark-mode-toggle"> Dark Mode
+        </label>
+    </footer>
+    
+</body>
+</html>
